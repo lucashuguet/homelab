@@ -8,6 +8,7 @@ networks:
 include:
   - homepage/compose.yaml
   - immich/compose.yaml
+  - komga/compose.yaml
   - pihole/compose.yaml
   - traefik/compose.yaml
   - wireguard/compose.yaml
@@ -37,6 +38,14 @@ services:
 
   database:
     networks: [homelab]
+
+  komga:
+    networks: [homelab]
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.komga.rule=Host(`komga.home.lab`)"
+      - "traefik.http.routers.komga.entrypoints=web"
+      - "traefik.http.services.komga.loadbalancer.server.port=25600"
 
   unbound:
     networks: [homelab]

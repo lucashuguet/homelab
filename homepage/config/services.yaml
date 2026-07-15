@@ -5,6 +5,12 @@
         description: Self-hosted photo and video management solution
         ping: immich-server
 
+    - Komga:
+        icon: /icons/komga.svg
+        href: http://komga.home.lab/
+        description: A media server for comics, mangas, BDs, magazines and eBooks
+        ping: komga
+
 - Networking:
     - PiHole:
         icon: /icons/pihole.svg
