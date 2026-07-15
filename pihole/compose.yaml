@@ -1,0 +1,30 @@
+services:
+  unbound:
+    image: mvance/unbound:latest
+    container_name: unbound
+    restart: unless-stopped
+    hostname: unbound
+    volumes:
+      - ./unbound.conf:/opt/unbound/etc/unbound/unbound.conf
+    cap_add:
+      - NET_ADMIN
+    env_file:
+      - ../.env
+
+  pihole:
+    depends_on:
+      - unbound
+    container_name: pihole
+    image: pihole/pihole:latest
+    restart: unless-stopped
+    hostname: pihole
+    volumes:
+      - ./data:/etc/pihole
+      - ./99-home-lab.conf:/etc/dnsmasq.d/99-home-lab.conf
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - FTLCONF_dns_upstreams=unbound
+    env_file:
+      - ../.env
+      - .env

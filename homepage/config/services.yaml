@@ -1,0 +1,19 @@
+- Media:
+    - Immich:
+        icon: /icons/immich.svg
+        href: http://immich.home.lab/
+        description: Self-hosted photo and video management solution
+        ping: immich-server
+
+- Networking:
+    - PiHole:
+        icon: /icons/pihole.svg
+        href: http://pihole.home.lab/
+        description: Network-wide Ad Blocking
+        ping: pihole
+
+    - Traefik:
+        icon: /icons/traefik.svg
+        href: http://traefik.home.lab/
+        description: Traefik reverse proxy dashboard
+        ping: traefik

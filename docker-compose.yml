@@ -1,0 +1,70 @@
+networks:
+  homelab:
+    ipam:
+      driver: default
+      config:
+       - subnet: 10.2.0.0/24
+
+include:
+  - homepage/compose.yaml
+  - immich/compose.yaml
+  - pihole/compose.yaml
+  - traefik/compose.yaml
+  - wireguard/compose.yaml
+
+services:
+  homepage:
+    networks: [homelab]
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.homepage.rule=Host(`home.lab`)"
+      - "traefik.http.routers.homepage.entrypoints=web"
+      - "traefik.http.services.homepage.loadbalancer.server.port=3000"
+
+  immich-server:
+    networks: [homelab]
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.immich.rule=Host(`immich.home.lab`)"
+      - "traefik.http.routers.immich.entrypoints=web"
+      - "traefik.http.services.immich.loadbalancer.server.port=2283"
+
+  immich-machine-learning:
+    networks: [homelab]
+
+  redis:
+    networks: [homelab]
+
+  database:
+    networks: [homelab]
+
+  unbound:
+    networks: [homelab]
+
+  pihole:
+    networks: [homelab]
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.pihole.rule=Host(`pihole.home.lab`)"
+      - "traefik.http.routers.pihole.entrypoints=web"
+      - "traefik.http.services.pihole.loadbalancer.server.port=80"
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+
+  traefik:
+    networks: [homelab]
+    ports:
+      - "80:80"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.home.lab`)"
+      - "traefik.http.routers.traefik.entrypoints=web"
+      - "traefik.http.services.traefik.loadbalancer.server.port=8080"
+
+  wireguard:
+    networks: [homelab]
+    depends_on:
+      - pihole
+    ports:
+      - "51820:51820/udp"

@@ -1,0 +1,11 @@
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    environment:
+      - HOMEPAGE_ALLOWED_HOSTS=home.lab
+    volumes:
+      - ./config:/app/config
+      - ./icons:/app/public/icons
+    restart: unless-stopped
+    env_file: ../.env

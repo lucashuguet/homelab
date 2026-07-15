@@ -1,0 +1,8 @@
+html {
+    font-size: 22px;
+}
+
+.service-icon img {
+    width: 100% !important;
+    height: auto !important;
+}
