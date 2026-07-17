@@ -1,6 +1,10 @@
 .env
 */.env
 
+beszel/data/
+beszel/data_agent/
+beszel/socket/
+
 homepage/config/logs/
 
 immich/data/

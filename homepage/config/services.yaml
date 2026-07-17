@@ -23,3 +23,10 @@
         href: http://traefik.home.lab/
         description: Traefik reverse proxy dashboard
         ping: traefik
+
+- Admin:
+    - Beszel:
+        icon: /icons/beszel.svg
+        href: http://beszel.home.lab/
+        description: Simple, lightweight server monitoring
+        ping: beszel

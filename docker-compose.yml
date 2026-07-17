@@ -6,6 +6,7 @@ networks:
        - subnet: 10.2.0.0/24
 
 include:
+  - beszel/compose.yaml
   - homepage/compose.yaml
   - immich/compose.yaml
   - komga/compose.yaml
@@ -14,6 +15,14 @@ include:
   - wireguard/compose.yaml
 
 services:
+  beszel:
+    networks: [homelab]
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.beszel.rule=Host(`beszel.home.lab`)"
+      - "traefik.http.routers.beszel.entrypoints=web"
+      - "traefik.http.services.beszel.loadbalancer.server.port=8090"
+
   homepage:
     networks: [homelab]
     labels:
