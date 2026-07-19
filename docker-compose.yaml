@@ -6,6 +6,7 @@ networks:
        - subnet: 10.2.0.0/24
 
 include:
+  - authentik/compose.yaml
   - beszel/compose.yaml
   - homepage/compose.yaml
   - immich/compose.yaml
@@ -15,8 +16,26 @@ include:
   - wireguard/compose.yaml
 
 services:
+  authentik-server:
+    networks: [homelab]
+    dns:
+      - 10.2.0.254
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.authentik.rule=Host(`authentik.home.lab`)"
+      - "traefik.http.routers.authentik.entrypoints=web"
+      - "traefik.http.services.authentik.loadbalancer.server.port=9000"
+
+  authentik-db:
+    networks: [homelab]
+
+  authentik-worker:
+    networks: [homelab]
+
   beszel:
     networks: [homelab]
+    dns:
+      - 10.2.0.254
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.beszel.rule=Host(`beszel.home.lab`)"
@@ -33,6 +52,8 @@ services:
 
   immich-server:
     networks: [homelab]
+    dns:
+      - 10.2.0.254
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.immich.rule=Host(`immich.home.lab`)"
@@ -42,14 +63,16 @@ services:
   immich-machine-learning:
     networks: [homelab]
 
-  redis:
+  immich-redis:
     networks: [homelab]
 
-  database:
+  immich-db:
     networks: [homelab]
 
   komga:
     networks: [homelab]
+    dns:
+      - 10.2.0.254
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.komga.rule=Host(`komga.home.lab`)"
@@ -60,7 +83,9 @@ services:
     networks: [homelab]
 
   pihole:
-    networks: [homelab]
+    networks:
+      homelab:
+        ipv4_address: 10.2.0.254
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.pihole.rule=Host(`pihole.home.lab`)"

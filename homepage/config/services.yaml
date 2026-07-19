@@ -30,3 +30,9 @@
         href: http://beszel.home.lab/
         description: Simple, lightweight server monitoring
         ping: beszel
+
+    - Authentik:
+        icon: /icons/authentik.svg
+        href: http://authentik.home.lab/
+        description: An open-source Identity Provider
+        ping: authentik-server

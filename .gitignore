@@ -1,6 +1,11 @@
 .env
 */.env
 
+authentik/certs/
+authentik/data/
+authentik/db/
+authentik/templates/
+
 beszel/data/
 beszel/data_agent/
 beszel/socket/
