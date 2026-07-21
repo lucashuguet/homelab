@@ -8,6 +8,7 @@ networks:
 include:
   - authentik/compose.yaml
   - beszel/compose.yaml
+  - forgejo/compose.yaml
   - homepage/compose.yaml
   - immich/compose.yaml
   - komga/compose.yaml
@@ -41,6 +42,18 @@ services:
       - "traefik.http.routers.beszel.rule=Host(`beszel.home.lab`)"
       - "traefik.http.routers.beszel.entrypoints=web"
       - "traefik.http.services.beszel.loadbalancer.server.port=8090"
+
+  forgejo:
+    networks: [homelab]
+    dns:
+      - 10.2.0.254
+    ports:
+      - "222:22"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.forgejo.rule=Host(`forgejo.home.lab`)"
+      - "traefik.http.routers.forgejo.entrypoints=web"
+      - "traefik.http.services.forgejo.loadbalancer.server.port=3000"
 
   homepage:
     networks: [homelab]

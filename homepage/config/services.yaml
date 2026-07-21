@@ -11,6 +11,13 @@
         description: A media server for comics, mangas, BDs, magazines and eBooks
         ping: komga
 
+- Development:
+    - Forgejo:
+        icon: /icons/forgejo.svg
+        href: http://forgejo.home.lab/
+        description: Lightweight, self‑hosted alternative to GitHub/GitLab
+        ping: forgejo
+
 - Networking:
     - PiHole:
         icon: /icons/pihole.svg

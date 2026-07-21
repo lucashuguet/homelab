@@ -10,6 +10,8 @@ beszel/data/
 beszel/data_agent/
 beszel/socket/
 
+forgejo/data/
+
 homepage/config/logs/
 
 immich/data/
