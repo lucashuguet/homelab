@@ -14,7 +14,7 @@
 - Networking:
     - PiHole:
         icon: /icons/pihole.svg
-        href: http://pihole.home.lab/
+        href: http://pihole.home.lab/admin/
         description: Network-wide Ad Blocking
         ping: pihole
 
