@@ -13,6 +13,7 @@ include:
   - immich/compose.yaml
   - komga/compose.yaml
   - pihole/compose.yaml
+  - searxng/compose.yaml
   - traefik/compose.yaml
   - wireguard/compose.yaml
 
@@ -107,6 +108,17 @@ services:
     ports:
       - "53:53/tcp"
       - "53:53/udp"
+
+  searxng-core:
+    networks: [homelab]
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.searxng.rule=Host(`searxng.home.lab`)"
+      - "traefik.http.routers.searxng.entrypoints=web"
+      - "traefik.http.services.searxng.loadbalancer.server.port=8080"
+
+  searxng-db:
+    networks: [homelab]
 
   traefik:
     networks: [homelab]

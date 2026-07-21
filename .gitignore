@@ -21,4 +21,7 @@ komga/config/
 pihole/data/
 pihole/99-home-lab.conf
 
+searxng/core/
+searxng/valkey/
+
 wireguard/data/

@@ -1,0 +1,20 @@
+use_default_settings: true
+
+server:
+  image_proxy: true
+  limiter: true
+
+ui:
+  autofocus : true
+  default_theme: simple
+  theme_args:
+    simple_style: black
+  results_on_new_tab: true
+  static_use_hash: true
+  hotkeys: vim
+
+search:
+  formats:
+    - html
+    - csv
+    - json

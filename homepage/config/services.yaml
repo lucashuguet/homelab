@@ -31,6 +31,12 @@
         description: Traefik reverse proxy dashboard
         ping: traefik
 
+    - SearXNG:
+        icon: /icons/searxng.svg
+        href: http://searxng.home.lab/
+        description: Free internet metasearch engine
+        ping: searxng-core
+
 - Admin:
     - Beszel:
         icon: /icons/beszel.svg
