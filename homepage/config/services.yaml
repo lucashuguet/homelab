@@ -11,6 +11,12 @@
         description: A media server for comics, mangas, BDs, magazines and eBooks
         ping: komga
 
+    - Invidious:
+        icon: /icons/invidious.svg
+        href: http://invidious.home.lab/
+        description: Open source alternative front-end to YouTube
+        ping: invidious
+
 - Development:
     - Forgejo:
         icon: /icons/forgejo.svg

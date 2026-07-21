@@ -16,6 +16,11 @@ homepage/config/logs/
 
 immich/data/
 
+invidious/cache/
+invidious/config/config.example.yml
+invidious/config/migrate-scripts/
+invidious/db/
+
 komga/config/
 
 pihole/data/

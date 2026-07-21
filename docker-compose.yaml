@@ -11,6 +11,7 @@ include:
   - forgejo/compose.yaml
   - homepage/compose.yaml
   - immich/compose.yaml
+  - invidious/compose.yaml
   - komga/compose.yaml
   - pihole/compose.yaml
   - searxng/compose.yaml
@@ -82,6 +83,26 @@ services:
 
   immich-db:
     networks: [homelab]
+
+  invidious:
+    networks: [homelab]
+    dns:
+      - 10.2.0.254
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.invidious.rule=Host(`invidious.home.lab`)"
+      - "traefik.http.routers.invidious.entrypoints=web"
+      - "traefik.http.services.invidious.loadbalancer.server.port=3000"
+
+  invidious-companion:
+    networks: [homelab]
+    dns:
+      - 10.2.0.254
+
+  invidious-db:
+    networks: [homelab]
+    dns:
+      - 10.2.0.254
 
   komga:
     networks: [homelab]
