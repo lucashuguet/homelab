@@ -45,6 +45,11 @@ services:
       - "traefik.http.routers.beszel.entrypoints=web"
       - "traefik.http.services.beszel.loadbalancer.server.port=8090"
 
+  beszel-agent:
+    networks: [homelab]
+    dns:
+      - 10.2.0.254
+
   forgejo:
     networks: [homelab]
     dns:

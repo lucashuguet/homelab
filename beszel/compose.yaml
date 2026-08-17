@@ -14,7 +14,6 @@ services:
     image: henrygd/beszel-agent:latest
     container_name: beszel_agent
     restart: unless-stopped
-    network_mode: host
     volumes:
       - ./data_agent:/var/lib/beszel-agent
       - ./socket:/beszel_socket
