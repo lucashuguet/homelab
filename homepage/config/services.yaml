@@ -17,6 +17,12 @@
         description: Open source alternative front-end to YouTube
         ping: invidious
 
+    - Jellyfin:
+        icon: /icons/jellyfin.svg
+        href: http://jellyfin.home.lab/
+        description: The Free Software Media System
+        ping: jellyfin
+
 - Development:
     - Forgejo:
         icon: /icons/forgejo.svg

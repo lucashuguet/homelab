@@ -12,6 +12,7 @@ include:
   - homepage/compose.yaml
   - immich/compose.yaml
   - invidious/compose.yaml
+  - jellyfin/compose.yaml
   - komga/compose.yaml
   - pihole/compose.yaml
   - searxng/compose.yaml
@@ -108,6 +109,16 @@ services:
     networks: [homelab]
     dns:
       - 10.2.0.254
+
+  jellyfin:
+    networks: [homelab]
+    ports:
+      - 8096:8096/tcp
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.jellyfin.rule=Host(`jellyfin.home.lab`)"
+      - "traefik.http.routers.jellyfin.entrypoints=web"
+      - "traefik.http.services.jellyfin.loadbalancer.server.port=8096"
 
   komga:
     networks: [homelab]

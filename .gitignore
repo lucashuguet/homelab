@@ -21,6 +21,9 @@ invidious/config/config.example.yml
 invidious/config/migrate-scripts/
 invidious/db/
 
+jellyfin/cache/
+jellyfin/config/
+
 komga/config/
 
 pihole/data/
