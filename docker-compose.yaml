@@ -122,6 +122,7 @@ services:
 
   komga:
     networks: [homelab]
+    depends_on: [authentik-server]
     dns:
       - 10.2.0.254
     labels:
