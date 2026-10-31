@@ -19,7 +19,7 @@ services:
     restart: unless-stopped
     hostname: pihole
     volumes:
-      - ./data:/etc/pihole
+      - pihole_data:/etc/pihole
       - ./99-home-lab.conf:/etc/dnsmasq.d/99-home-lab.conf
     cap_add:
       - NET_ADMIN
@@ -30,3 +30,6 @@ services:
     env_file:
       - ../.env
       - .env
+
+volumes:
+  pihole_data:
