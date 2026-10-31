@@ -25,6 +25,8 @@ services:
       - NET_ADMIN
     environment:
       - FTLCONF_dns_upstreams=unbound
+      - FTLCONF_misc_etc_dnsmasq_d=true
+      - FTLCONF_dns_listeningMode=ALL
     env_file:
       - ../.env
       - .env
