@@ -17,6 +17,7 @@ include:
   - pihole/compose.yaml
   # - searxng/compose.yaml
   - traefik/compose.yaml
+  - scrob/compose.yaml
   - wireguard/compose.yaml
 
 services:
@@ -180,6 +181,18 @@ services:
       - "traefik.http.routers.traefik.entrypoints=websecure"
       - "traefik.http.routers.traefik.service=api@internal"
       - "traefik.http.routers.traefik.tls=true"
+
+  scrob-db:
+    networks: [homelab]
+
+  scrob:
+    networks: [homelab]
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.scrob.rule=Host(`scrob.home.lab`)"
+      - "traefik.http.routers.scrob.entrypoints=websecure"
+      - "traefik.http.services.scrob.loadbalancer.server.port=7330"
+      - "traefik.http.routers.scrob.tls=true"
 
   wireguard:
     networks: [homelab]

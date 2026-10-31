@@ -1,0 +1,34 @@
+services:
+  scrob-db:
+    container_name: scrob_db
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: scrob
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: scrob
+    volumes:
+      - ${SCROB_LOCATION}/db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U scrob -d scrob"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    env_file:
+      - ../.env
+      - .env
+
+  scrob:
+    container_name: scrob
+    image: bellamy/scrob:${SCROB_VERSION}
+    restart: unless-stopped
+    depends_on:
+      scrob-db:
+        condition: service_healthy
+    volumes:
+      - ${SCROB_LOCATION}/data:/app/backend/data
+    environment:
+      DATABASE_URL: postgresql+asyncpg://scrob:postgres@scrob-db:5432/scrob
+    env_file:
+      - ../.env
+      - .env

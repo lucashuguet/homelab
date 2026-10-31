@@ -23,6 +23,13 @@
         description: The Free Software Media System
         ping: jellyfin
 
+    - Scrob:
+        icon: /icons/scrob.webp
+        href: https://scrob.home.lab/
+        description: Your media. Tracked your way.
+        ping: scrob
+
+
 - Development:
     - Forgejo:
         icon: /icons/forgejo.svg
