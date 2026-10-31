@@ -4,8 +4,8 @@ services:
     container_name: beszel
     restart: unless-stopped
     volumes:
-      - ./data:/beszel_data
-      - ./socket:/beszel_socket
+      - beszel_data:/beszel_data
+      - beszel_socket:/beszel_socket
     env_file:
       - ../.env
       - .env
@@ -15,12 +15,19 @@ services:
     container_name: beszel_agent
     restart: unless-stopped
     volumes:
-      - ./data_agent:/var/lib/beszel-agent
-      - ./socket:/beszel_socket
+      - agent_data:/var/lib/beszel-agent
+      - beszel_socket:/beszel_socket
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
       LISTEN: /beszel_socket/beszel.sock
-      HUB_URL: ${APP_URL}
+      HUB_URL: "http://beszel:8090"
+    depends_on:
+      - beszel
     env_file:
       - ../.env
       - .env
+
+volumes:
+  beszel_data:
+  beszel_socket:
+  agent_data:

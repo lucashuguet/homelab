@@ -2,9 +2,9 @@ services:
   komga:
     image: gotson/komga:${VERSION}
     container_name: komga
-    user: "1000:100"
+    user: "1000:1000"
     volumes:
-      - ./config:/config
+      - ${LIBRARY_PATH}/.config:/config
       - ${LIBRARY_PATH}:/data
     restart: unless-stopped
     env_file:

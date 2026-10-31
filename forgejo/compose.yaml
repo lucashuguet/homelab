@@ -1,9 +1,11 @@
 services:
   forgejo:
-    image: codeberg.org/forgejo/forgejo:16
+    image: codeberg.org/forgejo/forgejo:${FORGEJO_VERSION}
     container_name: forgejo
     restart: unless-stopped
     volumes:
-      - ./data:/data
+      - ${DATA_LOCATION}:/data
       - /etc/localtime:/etc/localtime:ro
-    env_file: ../.env
+    env_file: 
+      - ../.env
+      - .env
