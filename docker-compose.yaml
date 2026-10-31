@@ -6,7 +6,7 @@ networks:
        - subnet: 10.2.0.0/24
 
 include:
-  # - authentik/compose.yaml
+  - authentik/compose.yaml
   - beszel/compose.yaml
   - forgejo/compose.yaml
   - homepage/compose.yaml
@@ -21,22 +21,22 @@ include:
   - wireguard/compose.yaml
 
 services:
-  # authentik-server:
-  #   networks: [homelab]
-  #   dns:
-  #     - 10.2.0.254
-  #   labels:
-  #     - "traefik.enable=true"
-  #     - "traefik.http.routers.authentik.rule=Host(`authentik.home.lab`)"
-  #     - "traefik.http.routers.authentik.entrypoints=websecure"
-  #     - "traefik.http.services.authentik.loadbalancer.server.port=9000"
-  #     - "traefik.http.routers.authentik.tls=true"
-  #
-  # authentik-db:
-  #   networks: [homelab]
-  #
-  # authentik-worker:
-  #   networks: [homelab]
+  authentik-server:
+    networks: [homelab]
+    dns:
+      - 10.2.0.254
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.authentik.rule=Host(`authentik.home.lab`)"
+      - "traefik.http.routers.authentik.entrypoints=websecure"
+      - "traefik.http.services.authentik.loadbalancer.server.port=9000"
+      - "traefik.http.routers.authentik.tls=true"
+
+  authentik-db:
+    networks: [homelab]
+
+  authentik-worker:
+    networks: [homelab]
 
   beszel:
     networks: [homelab]

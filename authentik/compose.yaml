@@ -6,8 +6,8 @@ services:
     restart: unless-stopped
     shm_size: 512mb
     volumes:
-      - ./data:/data
-      - ./templates:/templates
+      - authentik_data:/data
+      - authentik_templates:/templates
     env_file:
       - ../.env
       - .env
@@ -26,14 +26,14 @@ services:
     image: docker.io/library/postgres:16-alpine
     restart: unless-stopped
     volumes:
-      - ./db:/var/lib/postgresql/data
+      - authentik_db:/var/lib/postgresql/data
     env_file:
       - ../.env
       - .env
     environment:
-      POSTGRES_DB: ${PG_DB:-authentik}
-      POSTGRES_PASSWORD: ${PG_PASS:?database password required}
-      POSTGRES_USER: ${PG_USER:-authentik}
+      POSTGRES_DB: authentik
+      POSTGRES_PASSWORD: ${PG_PASS}
+      POSTGRES_USER: authentik
     healthcheck:
       interval: 30s
       retries: 5
@@ -45,22 +45,22 @@ services:
 
   authentik-worker:
     container_name: authentik_worker
-    image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-2026.5.5}
+    image: ghcr.io/goauthentik/server:${AUTHENTIK_TAG}
     command: worker
     environment:
       AUTHENTIK_POSTGRESQL__HOST: authentik-db
-      AUTHENTIK_POSTGRESQL__NAME: ${PG_DB:-authentik}
+      AUTHENTIK_POSTGRESQL__NAME: authentik
       AUTHENTIK_POSTGRESQL__PASSWORD: ${PG_PASS}
-      AUTHENTIK_POSTGRESQL__USER: ${PG_USER:-authentik}
-      AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY:?secret key required}
+      AUTHENTIK_POSTGRESQL__USER: authentik
+      AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY}
     restart: unless-stopped
     shm_size: 512mb
     user: root
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./data:/data
-      - ./certs:/certs
-      - ./templates:/templates
+      - authentik_data:/data
+      - authentik_certs:/certs
+      - authentik_templates:/templates
     env_file:
       - ../.env
       - .env
@@ -68,4 +68,8 @@ services:
       authentik-db:
         condition: service_healthy
 
-
+volumes:
+  authentik_certs:
+  authentik_data:
+  authentik_db:
+  authentik_templates:
