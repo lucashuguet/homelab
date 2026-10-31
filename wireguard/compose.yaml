@@ -6,7 +6,7 @@ services:
     cap_add:
       - NET_ADMIN
     volumes:
-      - ./data:/config
+      - ${CONFIG_LOCATION}:/config
       - /lib/modules:/lib/modules:ro
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
