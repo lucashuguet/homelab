@@ -6,35 +6,36 @@ networks:
        - subnet: 10.2.0.0/24
 
 include:
-  - authentik/compose.yaml
+  # - authentik/compose.yaml
   - beszel/compose.yaml
   - forgejo/compose.yaml
   - homepage/compose.yaml
   - immich/compose.yaml
-  - invidious/compose.yaml
-  - jellyfin/compose.yaml
+  # - invidious/compose.yaml
+  # - jellyfin/compose.yaml
   - komga/compose.yaml
   - pihole/compose.yaml
-  - searxng/compose.yaml
+  # - searxng/compose.yaml
   - traefik/compose.yaml
   - wireguard/compose.yaml
 
 services:
-  authentik-server:
-    networks: [homelab]
-    dns:
-      - 10.2.0.254
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.authentik.rule=Host(`authentik.home.lab`)"
-      - "traefik.http.routers.authentik.entrypoints=web"
-      - "traefik.http.services.authentik.loadbalancer.server.port=9000"
-
-  authentik-db:
-    networks: [homelab]
-
-  authentik-worker:
-    networks: [homelab]
+  # authentik-server:
+  #   networks: [homelab]
+  #   dns:
+  #     - 10.2.0.254
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - "traefik.http.routers.authentik.rule=Host(`authentik.home.lab`)"
+  #     - "traefik.http.routers.authentik.entrypoints=websecure"
+  #     - "traefik.http.services.authentik.loadbalancer.server.port=9000"
+  #     - "traefik.http.routers.authentik.tls=true"
+  #
+  # authentik-db:
+  #   networks: [homelab]
+  #
+  # authentik-worker:
+  #   networks: [homelab]
 
   beszel:
     networks: [homelab]
@@ -43,8 +44,9 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.beszel.rule=Host(`beszel.home.lab`)"
-      - "traefik.http.routers.beszel.entrypoints=web"
+      - "traefik.http.routers.beszel.entrypoints=websecure"
       - "traefik.http.services.beszel.loadbalancer.server.port=8090"
+      - "traefik.http.routers.beszel.tls=true"
 
   beszel-agent:
     networks: [homelab]
@@ -60,16 +62,18 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.forgejo.rule=Host(`forgejo.home.lab`)"
-      - "traefik.http.routers.forgejo.entrypoints=web"
+      - "traefik.http.routers.forgejo.entrypoints=websecure"
       - "traefik.http.services.forgejo.loadbalancer.server.port=3000"
+      - "traefik.http.routers.forgejo.tls=true"
 
   homepage:
     networks: [homelab]
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.homepage.rule=Host(`home.lab`)"
-      - "traefik.http.routers.homepage.entrypoints=web"
+      - "traefik.http.routers.homepage.entrypoints=websecure"
       - "traefik.http.services.homepage.loadbalancer.server.port=3000"
+      - "traefik.http.routers.homepage.tls=true"
 
   immich-server:
     networks: [homelab]
@@ -78,8 +82,9 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.immich.rule=Host(`immich.home.lab`)"
-      - "traefik.http.routers.immich.entrypoints=web"
+      - "traefik.http.routers.immich.entrypoints=websecure"
       - "traefik.http.services.immich.loadbalancer.server.port=2283"
+      - "traefik.http.routers.immich.tls=true"
 
   immich-machine-learning:
     networks: [homelab]
@@ -90,46 +95,50 @@ services:
   immich-db:
     networks: [homelab]
 
-  invidious:
-    networks: [homelab]
-    dns:
-      - 10.2.0.254
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.invidious.rule=Host(`invidious.home.lab`)"
-      - "traefik.http.routers.invidious.entrypoints=web"
-      - "traefik.http.services.invidious.loadbalancer.server.port=3000"
+  # invidious:
+  #   networks: [homelab]
+  #   dns:
+  #     - 10.2.0.254
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - "traefik.http.routers.invidious.rule=Host(`invidious.home.lab`)"
+  #     - "traefik.http.routers.invidious.entrypoints=websecure"
+  #     - "traefik.http.services.invidious.loadbalancer.server.port=3000"
+  #     - "traefik.http.routers.invidious.tls=true"
+  #
+  # invidious-companion:
+  #   networks: [homelab]
+  #   dns:
+  #     - 10.2.0.254
+  #
+  # invidious-db:
+  #   networks: [homelab]
+  #   dns:
+  #     - 10.2.0.254
 
-  invidious-companion:
-    networks: [homelab]
-    dns:
-      - 10.2.0.254
-
-  invidious-db:
-    networks: [homelab]
-    dns:
-      - 10.2.0.254
-
-  jellyfin:
-    networks: [homelab]
-    ports:
-      - 8096:8096/tcp
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.jellyfin.rule=Host(`jellyfin.home.lab`)"
-      - "traefik.http.routers.jellyfin.entrypoints=web"
-      - "traefik.http.services.jellyfin.loadbalancer.server.port=8096"
+  # jellyfin:
+  #   networks: [homelab]
+  #   ports:
+  #     - 8096:8096/tcp
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - "traefik.http.routers.jellyfin.rule=Host(`jellyfin.home.lab`)"
+  #     - "traefik.http.routers.jellyfin.entrypoints=websecure"
+  #     - "traefik.http.services.jellyfin.loadbalancer.server.port=8096"
+  #     - "traefik.http.routers.jellyfin.tls=true"
 
   komga:
     networks: [homelab]
-    depends_on: [authentik-server]
     dns:
       - 10.2.0.254
+    ports:
+      - "25600:25600"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.komga.rule=Host(`komga.home.lab`)"
-      - "traefik.http.routers.komga.entrypoints=web"
+      - "traefik.http.routers.komga.entrypoints=websecure"
       - "traefik.http.services.komga.loadbalancer.server.port=25600"
+      - "traefik.http.routers.komga.tls=true"
 
   unbound:
     networks: [homelab]
@@ -141,32 +150,36 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.pihole.rule=Host(`pihole.home.lab`)"
-      - "traefik.http.routers.pihole.entrypoints=web"
+      - "traefik.http.routers.pihole.entrypoints=websecure"
       - "traefik.http.services.pihole.loadbalancer.server.port=80"
+      - "traefik.http.routers.pihole.tls=true"
     ports:
       - "53:53/tcp"
       - "53:53/udp"
 
-  searxng-core:
-    networks: [homelab]
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.searxng.rule=Host(`searxng.home.lab`)"
-      - "traefik.http.routers.searxng.entrypoints=web"
-      - "traefik.http.services.searxng.loadbalancer.server.port=8080"
-
-  searxng-db:
-    networks: [homelab]
+  # searxng-core:
+  #   networks: [homelab]
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - "traefik.http.routers.searxng.rule=Host(`searxng.home.lab`)"
+  #     - "traefik.http.routers.searxng.entrypoints=websecure"
+  #     - "traefik.http.services.searxng.loadbalancer.server.port=8080"
+  #     - "traefik.http.routers.searxng.tls=true"
+  #
+  # searxng-db:
+  #   networks: [homelab]
 
   traefik:
     networks: [homelab]
     ports:
       - "80:80"
+      - "443:443"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik.rule=Host(`traefik.home.lab`)"
-      - "traefik.http.routers.traefik.entrypoints=web"
-      - "traefik.http.services.traefik.loadbalancer.server.port=8080"
+      - "traefik.http.routers.traefik.entrypoints=websecure"
+      - "traefik.http.routers.traefik.service=api@internal"
+      - "traefik.http.routers.traefik.tls=true"
 
   wireguard:
     networks: [homelab]

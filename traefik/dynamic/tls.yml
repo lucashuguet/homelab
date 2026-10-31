@@ -1,0 +1,9 @@
+tls:
+  certificates:
+    - certFile: /certs/home.lab.pem
+      keyFile: /certs/home.lab-key.pem
+  stores:
+    default:
+      defaultCertificate:
+        certFile: /certs/home.lab.pem
+        keyFile: /certs/home.lab-key.pem

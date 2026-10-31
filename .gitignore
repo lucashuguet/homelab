@@ -1,20 +1,7 @@
 .env
 */.env
 
-authentik/certs/
-authentik/data/
-authentik/db/
-authentik/templates/
-
-beszel/data/
-beszel/data_agent/
-beszel/socket/
-
-forgejo/data/
-
 homepage/config/logs/
-
-immich/data/
 
 invidious/cache/
 invidious/config/config.example.yml
@@ -24,12 +11,10 @@ invidious/db/
 jellyfin/cache/
 jellyfin/config/
 
-komga/config/
-
 pihole/data/
 pihole/99-home-lab.conf
 
 searxng/core/
 searxng/valkey/
 
-wireguard/data/
+traefik/certs/

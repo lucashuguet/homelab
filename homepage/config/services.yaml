@@ -1,63 +1,63 @@
 - Media:
     - Immich:
         icon: /icons/immich.svg
-        href: http://immich.home.lab/
+        href: https://immich.home.lab/
         description: Self-hosted photo and video management solution
         ping: immich-server
 
     - Komga:
         icon: /icons/komga.svg
-        href: http://komga.home.lab/
+        href: https://komga.home.lab/
         description: A media server for comics, mangas, BDs, magazines and eBooks
         ping: komga
 
     - Invidious:
         icon: /icons/invidious.svg
-        href: http://invidious.home.lab/
+        href: https://invidious.home.lab/
         description: Open source alternative front-end to YouTube
         ping: invidious
 
     - Jellyfin:
         icon: /icons/jellyfin.svg
-        href: http://jellyfin.home.lab/
+        href: https://jellyfin.home.lab/
         description: The Free Software Media System
         ping: jellyfin
 
 - Development:
     - Forgejo:
         icon: /icons/forgejo.svg
-        href: http://forgejo.home.lab/
+        href: https://forgejo.home.lab/
         description: Lightweight, self‑hosted alternative to GitHub/GitLab
         ping: forgejo
 
 - Networking:
     - PiHole:
         icon: /icons/pihole.svg
-        href: http://pihole.home.lab/admin/
+        href: https://pihole.home.lab/admin/
         description: Network-wide Ad Blocking
         ping: pihole
 
     - Traefik:
         icon: /icons/traefik.svg
-        href: http://traefik.home.lab/
+        href: https://traefik.home.lab/
         description: Traefik reverse proxy dashboard
         ping: traefik
 
     - SearXNG:
         icon: /icons/searxng.svg
-        href: http://searxng.home.lab/
+        href: https://searxng.home.lab/
         description: Free internet metasearch engine
         ping: searxng-core
 
 - Admin:
     - Beszel:
         icon: /icons/beszel.svg
-        href: http://beszel.home.lab/
+        href: https://beszel.home.lab/
         description: Simple, lightweight server monitoring
         ping: beszel
 
     - Authentik:
         icon: /icons/authentik.svg
-        href: http://authentik.home.lab/
+        href: https://authentik.home.lab/
         description: An open-source Identity Provider
         ping: authentik-server
