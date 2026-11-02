@@ -18,6 +18,7 @@ include:
   # - searxng/compose.yaml
   - traefik/compose.yaml
   - scrob/compose.yaml
+  - vaultwarden/compose.yaml
   - wireguard/compose.yaml
 
 services:
@@ -193,6 +194,15 @@ services:
       - "traefik.http.routers.scrob.entrypoints=websecure"
       - "traefik.http.services.scrob.loadbalancer.server.port=7330"
       - "traefik.http.routers.scrob.tls=true"
+
+  vaultwarden:
+    networks: [homelab]
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.vaultwarden.rule=Host(`vault.home.lab`)"
+      - "traefik.http.routers.vaultwarden.entrypoints=websecure"
+      - "traefik.http.services.vaultwarden.loadbalancer.server.port=80"
+      - "traefik.http.routers.vaultwarden.tls=true"
 
   wireguard:
     networks: [homelab]

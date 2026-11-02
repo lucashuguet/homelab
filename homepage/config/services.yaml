@@ -68,3 +68,9 @@
         href: https://authentik.home.lab/
         description: An open-source Identity Provider
         ping: authentik-server
+
+    - Vaultwarden:
+        icon: /icons/vaultwarden.svg
+        href: https://vault.home.lab/
+        description: Bitwarden implementation in rust
+        ping: vaultwarden
