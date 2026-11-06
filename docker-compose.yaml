@@ -141,6 +141,9 @@ services:
       - "traefik.http.routers.komga.entrypoints=websecure"
       - "traefik.http.services.komga.loadbalancer.server.port=25600"
       - "traefik.http.routers.komga.tls=true"
+    depends_on:
+      authentik-server:
+        condition: service_healthy
 
   unbound:
     networks: [homelab]
@@ -207,6 +210,7 @@ services:
   wireguard:
     networks: [homelab]
     depends_on:
-      - pihole
+      pihole:
+        condition: service_healthy
     ports:
       - "51820:51820/udp"

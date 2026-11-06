@@ -3,9 +3,12 @@ services:
     image: gotson/komga:${VERSION}
     container_name: komga
     user: "1000:1000"
+    environment:
+      - JAVA_TOOL_OPTIONS=-Djavax.net.ssl.trustStore=/certs/cacerts -Djavax.net.ssl.trustStorePassword=changeit
     volumes:
       - ${LIBRARY_PATH}/.config:/config
       - ${LIBRARY_PATH}:/data
+      - ${CERTS_PATH}/jvm_cacerts.crt:/certs/cacerts:ro
     restart: unless-stopped
     env_file:
       - ../.env

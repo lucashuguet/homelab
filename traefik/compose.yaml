@@ -14,7 +14,7 @@ services:
       - "--api.dashboard=true"
       # - "--api.insecure=true"
     volumes:
-      - ./certs:/certs:ro
+      - ${CERTS_PATH}:/certs:ro
       - ./dynamic:/dynamic:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
     env_file: ../.env
