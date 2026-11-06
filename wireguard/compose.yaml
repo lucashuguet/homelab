@@ -14,3 +14,19 @@ services:
     env_file:
       - ../.env
       - .env
+
+  wstunnel:
+    image: ghcr.io/erebe/wstunnel:latest
+    container_name: wstunnel
+    command: >
+      sh -c "exec /home/app/wstunnel server
+      wss://0.0.0.0:8443
+      --restrict-to wireguard:51820
+      --tls-certificate /certs/wstunnel.pem
+      --tls-private-key /certs/wstunnel-key.pem"
+    volumes:
+      - ${CERTS_PATH}:/certs:ro
+    restart: unless-stopped
+    depends_on:
+      - wireguard
+    env_file: ../.env

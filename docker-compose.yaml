@@ -214,3 +214,8 @@ services:
         condition: service_healthy
     ports:
       - "51820:51820/udp"
+
+  wstunnel:
+    networks: [homelab]
+    ports:
+      - 8443:8443/tcp
